@@ -1,4 +1,4 @@
-#TeleCord
+# TeleCord
 
 This software creates a two-way interface between Telegram and Discord.
 
