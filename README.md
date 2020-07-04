@@ -8,7 +8,7 @@ This software creates a two-way interface between Telegram and Discord.
 #### On Discord
 Join [this discord server](https://discord.gg/dmMev8d) and open your Direct Messages / Send a DM to TeleCord.
 #### On Telegram
-Start a conversation with [this bot](t.me/millefeuilleTeleCordBot).
+Start a conversation with [this bot](https://t.me/millefeuilleTeleCordBot).
 
 ### Sending Messages
 #### From Discord
