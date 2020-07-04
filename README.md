@@ -13,5 +13,7 @@ Start a conversation with [this bot](https://t.me/millefeuilleTeleCordBot).
 ### Sending Messages
 #### From Discord
 Send `/dest -[Contact telegramID]` to the TeleCord bot and the tunnel `Discord->Telegram` is now open.
+To get your userID you need to have dev mode activated in Discord and then right click the desired profile, and select `Copy ID`
 #### From Telegram
 Send `/dest -[Contact discordID]` to the TeleCord bot and the tunnel `Telegram->Discord` is now open.
+To get your userID start a convo with `userinfobot` on Telegram.
