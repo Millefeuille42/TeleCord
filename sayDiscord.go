@@ -65,7 +65,7 @@ func discordTransmitMessage(message *discordgo.MessageCreate, session *discordgo
 		return err
 	}
 
-	sendMessage := fmt.Sprintf("FROM: %s(%s)\n\t%s", message.Author.Username, message.Author.ID, message.Content)
+	sendMessage := fmt.Sprintf("FROM: %s (%s)\n\t%s", message.Author.Username, message.Author.ID, message.Content)
 	msg := tgbotapi.NewMessage(int64(fileDataJson.TelegramID), sendMessage)
 	_, err = bot.Send(msg)
 	if err != nil {
