@@ -79,7 +79,7 @@ func telegramMessageHandler(bot *tgbotapi.BotAPI, session *discordgo.Session) {
 				}
 			}
 			if strings.HasPrefix(update.Message.Text, "/myID") {
-				msg := tgbotapi.NewMessage(update.Message.Chat.ID, fmt.Sprintf("%d", update.Message.From.ID))
+				msg := tgbotapi.NewMessage(update.Message.Chat.ID, fmt.Sprintf("Your Telegram ID:\n\t%d", update.Message.From.ID))
 				_, _ = bot.Send(msg)
 			}
 			continue
@@ -118,7 +118,7 @@ func messageHandler(session *discordgo.Session, message *discordgo.MessageCreate
 			}
 		}
 		if strings.HasPrefix(message.Content, "/myID") {
-			msg := fmt.Sprintf("Your Discord ID %s", message.Author.ID)
+			msg := fmt.Sprintf("Your Discord ID:\n\t%s", message.Author.ID)
 			_, _ = session.ChannelMessageSend(message.ChannelID, msg)
 		}
 		return
