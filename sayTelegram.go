@@ -10,8 +10,8 @@ import (
 )
 
 type telegramContact struct {
-	TelegramID	int `json:"telegramID"`
-	DiscordID	int `json:"discordID"`
+	TelegramID int `json:"telegramID"`
+	DiscordID  int `json:"discordID"`
 }
 
 func telegramRegisterUser(telegramID int, discordID int) error {
@@ -74,6 +74,16 @@ func telegramTransmitMessage(message *tgbotapi.Message, session *discordgo.Sessi
 	_, err = session.ChannelMessageSend(dmChan.ID, sendMessage)
 	if err != nil {
 		return err
+	}
+	if message.Document != nil {
+		fileURL, err := bot.GetFileDirectURL(message.Document.FileID)
+		if err != nil {
+			return err
+		}
+		_, err = session.ChannelMessageSend(dmChan.ID, fileURL)
+		if err != nil {
+			return err
+		}
 	}
 	return nil
 }
