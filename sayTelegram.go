@@ -67,7 +67,7 @@ func telegramTransmitMessage(message *tgbotapi.Message, session *discordgo.Sessi
 	}
 
 	dmChan, err := session.UserChannelCreate(fmt.Sprintf("%d", fileDataJson.DiscordID))
-	sendMessage := fmt.Sprintf("```FROM: %s\n\t%s```", message.From.UserName, message.Text)
+	sendMessage := fmt.Sprintf("```FROM: %s (%d)\n\t%s```", message.From.UserName, message.From.ID, message.Text)
 	if err != nil {
 		return err
 	}
