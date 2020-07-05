@@ -19,11 +19,12 @@ Send `/dest -[Contact discordID]` to the TeleCord bot and the tunnel `Telegram->
 To get your userID start a convo with `userinfobot` on Telegram.
 
 ## Known Bugs
-- Attachments such as images, audio, files... Are not working
+- None, Yay !!
 
 ## Roadmap
-- Adding the userID next to the name
-- Adding a command to get your own userID
 - Adding a command to know current destination
-- Adding attachments support
 - Adding more platforms (Slack for example)
+
+## Commands
+- `/myID` Get your user ID
+- `/dest` refer to `How to use` part
