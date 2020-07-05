@@ -70,7 +70,7 @@ func telegramMessageHandler(bot *tgbotapi.BotAPI, session *discordgo.Session) {
 					id, _ := strconv.Atoi(arg[1])
 					err := telegramRegisterUser(update.Message.From.ID, id)
 					if err != nil {
-						msg := tgbotapi.NewMessage(update.Message.Chat.ID,  fmt.Sprintf("An Error Occurred %s", err.Error()))
+						msg := tgbotapi.NewMessage(update.Message.Chat.ID, fmt.Sprintf("An Error Occurred %s", err.Error()))
 						_, _ = bot.Send(msg)
 					}
 				} else {
@@ -78,12 +78,16 @@ func telegramMessageHandler(bot *tgbotapi.BotAPI, session *discordgo.Session) {
 					_, _ = bot.Send(msg)
 				}
 			}
+			if strings.HasPrefix(update.Message.Text, "/myID") {
+				msg := tgbotapi.NewMessage(update.Message.Chat.ID, fmt.Sprintf("%d", update.Message.From.ID))
+				_, _ = bot.Send(msg)
+			}
 			continue
 		}
 
 		err := telegramTransmitMessage(update.Message, session, bot)
 		if err != nil {
-			msg := tgbotapi.NewMessage(update.Message.Chat.ID,  fmt.Sprintf("An Error Occurred %s", err.Error()))
+			msg := tgbotapi.NewMessage(update.Message.Chat.ID, fmt.Sprintf("An Error Occurred %s", err.Error()))
 			_, _ = bot.Send(msg)
 		}
 	}
@@ -112,6 +116,10 @@ func messageHandler(session *discordgo.Session, message *discordgo.MessageCreate
 			} else {
 				_, _ = session.ChannelMessageSend(message.ChannelID, "You must provide a UserID")
 			}
+		}
+		if strings.HasPrefix(message.Content, "/myID") {
+			msg := fmt.Sprintf("Your Discord ID %s", message.Author.ID)
+			_, _ = session.ChannelMessageSend(message.ChannelID, msg)
 		}
 		return
 	}
