@@ -71,5 +71,15 @@ func discordTransmitMessage(message *discordgo.MessageCreate, session *discordgo
 	if err != nil {
 		return err
 	}
+
+	for _, attachment := range message.Attachments {
+		sendMessage := fmt.Sprintf("%s", attachment.URL)
+		msg := tgbotapi.NewMessage(int64(fileDataJson.TelegramID), sendMessage)
+		_, err = bot.Send(msg)
+		if err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
