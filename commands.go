@@ -19,6 +19,7 @@ func register(origin string, message messageStruct) error {
 
 	arg[1] = strings.TrimSpace(arg[1])
 	arg[2] = strings.TrimSpace(arg[2])
+	arg[2] = strings.ToLower(arg[2])
 	arg[3] = strings.TrimSpace(arg[3])
 	dest, _ := strconv.Atoi(arg[1])
 	contact := contact{
@@ -43,7 +44,7 @@ func register(origin string, message messageStruct) error {
 	if err != nil {
 		return err
 	}
-	err = sendMessage(origin, fmt.Sprintf("You are now talking to %s (%s) on %s", arg[1], arg[2], arg[3]),
+	err = sendMessage(origin, fmt.Sprintf("You are now talking to %s (%s) on %s", arg[3], arg[1], arg[2]),
 		message.senderID, nil)
 	if err != nil {
 		return err
