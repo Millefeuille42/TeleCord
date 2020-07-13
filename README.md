@@ -21,8 +21,7 @@ To get your userID start a convo with `userinfobot` on Telegram.
 - (Case By Case) Some attachments may not work. Report if an attachement is not sent properly.
 
 ## Roadmap
-- Adding a command to know current destination
-- Adding more platforms (Slack for example)
+- Adding more platforms (Facebook Messenger for example)
 
 ## Commands
 - `/dest`   refer to `How to use` part
