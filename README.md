@@ -25,5 +25,6 @@ To get your userID start a convo with `userinfobot` on Telegram.
 - Adding more platforms (Slack for example)
 
 ## Commands
-- `/myID` Get your user ID
-- `/dest` refer to `How to use` part
+- `/dest`   refer to `How to use` part
+- `/myID`   Get your user ID
+- `/myDest` Get info about who you are talking to

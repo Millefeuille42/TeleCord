@@ -51,6 +51,34 @@ func register(origin string, message messageStruct) error {
 	return nil
 }
 
+func getDest(origin string, message messageStruct) error {
+	var path = fmt.Sprintf("./data/%s/%d.json", origin, message.senderID)
+
+	_, err := os.Stat(path)
+	if os.IsNotExist(err) {
+		_ = sendMessage(origin, "You must register using /dest -ID -Platform -Nickname",
+			message.senderID, nil)
+		return nil
+	}
+	fileData, err := ioutil.ReadFile(path)
+	if err != nil {
+		return err
+	}
+	fileDataJson := contact{}
+	err = json.Unmarshal(fileData, &fileDataJson)
+	if err != nil {
+		return err
+	}
+
+	response := fmt.Sprintf("Currently talking to %s (%d) on %s",
+		fileDataJson.ToName, fileDataJson.ToID, fileDataJson.ToPlatform)
+	err = sendMessage(origin, response, message.senderID, nil)
+	if err != nil {
+		return err
+	}
+	return err
+}
+
 func sendMessage(platform, text string, dest int, attachments []string) error {
 	attachmentsList := ""
 

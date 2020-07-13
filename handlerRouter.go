@@ -31,11 +31,15 @@ func handlerRouter(origin string) {
 		if strings.HasPrefix(message.messageContent, "/myID") {
 			err = sendMessage(origin, fmt.Sprintf("Your ID:\n\t%d", message.senderID), message.senderID, nil)
 		}
+		if strings.HasPrefix(message.messageContent, "/myDest") {
+			err = getDest(origin, message)
+		}
 		if err != nil {
 			_ = sendMessage(origin, err.Error(), message.senderID, nil)
 		}
 		return
 	}
+
 	err = transmitMessage(origin, message)
 	if err != nil {
 		_ = sendMessage(origin, err.Error(), message.senderID, nil)
