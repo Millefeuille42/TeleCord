@@ -18,7 +18,7 @@ To get your userID you need to have dev mode activated in Discord and then right
 To get your userID start a convo with `userinfobot` on Telegram.
 
 ## Known Bugs
-- None, Yay !!
+- (Case By Case) Some attachments may not work. Report if an attachement is not sent properly.
 
 ## Roadmap
 - Adding a command to know current destination
