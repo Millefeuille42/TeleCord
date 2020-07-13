@@ -6,6 +6,7 @@ import (
 )
 
 type socketStruct struct {
+	telegramSession *tgbotapi.BotAPI
 	telegramMessage tgbotapi.Update
 	discordSession  *discordgo.Session
 	discordMessage  *discordgo.MessageCreate

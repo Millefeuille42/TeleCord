@@ -1,14 +1,20 @@
-
 package main
 
 import (
 	"log"
 	"sort"
+	"time"
 )
 
 func checkError(err error) {
 	if err != nil {
 		panic(err)
+	}
+}
+
+func hang() {
+	for {
+		time.Sleep(1 * time.Second)
 	}
 }
 

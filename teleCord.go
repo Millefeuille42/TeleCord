@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-var bot *tgbotapi.BotAPI
+var socket socketStruct
 
 func main() {
 	args := os.Args
@@ -19,20 +19,16 @@ func main() {
 		fmt.Printf("%s telegramToken discordToken", args[0])
 		return
 	}
-	bot, _ = tgbotapi.NewBotAPI(args[1])
-	bot.Debug = true
-	fmt.Printf("Authorized on account %s\n", bot.Self.UserName)
 
-	discordBot, err := discordgo.New("Bot " + args[2])
-	checkError(err)
-	fmt.Println("Discord bot created")
-	discordBot.AddHandler(messageHandler)
-	err = discordBot.Open()
-	checkError(err)
-	fmt.Println("Discord Bot up and running")
+	socket = socketStruct{
+		telegramSession: telegramSetup(args),
+		discordSession:  discordSetup(args),
+		discordMessage:  nil,
+		telegramMessage: tgbotapi.Update{},
+	}
 
-	setupCloseHandler(discordBot)
-	telegramMessageHandler(bot, discordBot)
+	setupCloseHandler(socket.discordSession)
+	hang()
 }
 
 func setupCloseHandler(session *discordgo.Session) {
@@ -45,40 +41,4 @@ func setupCloseHandler(session *discordgo.Session) {
 		_ = session.Close()
 		os.Exit(0)
 	}()
-}
-
-func telegramMessageHandler(bot *tgbotapi.BotAPI, session *discordgo.Session) {
-	u := tgbotapi.NewUpdate(0)
-	u.Timeout = 60
-	updates, err := bot.GetUpdatesChan(u)
-
-	checkError(err)
-
-	for update := range updates {
-		if update.Message == nil {
-			continue
-		}
-		socket := socketStruct{
-			telegramMessage: update,
-			discordSession:  session,
-			discordMessage:  &discordgo.MessageCreate{},
-		}
-		handlerRouter("telegram", socket)
-	}
-}
-
-func messageHandler(session *discordgo.Session, message *discordgo.MessageCreate) {
-
-	botID, err := session.User("@me")
-	checkError(err)
-
-	if botID.ID == message.Author.ID {
-		return
-	}
-	socket := socketStruct{
-		telegramMessage: tgbotapi.Update{},
-		discordSession:  session,
-		discordMessage:  message,
-	}
-	handlerRouter("discord", socket)
 }

@@ -3,18 +3,17 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 	"io/ioutil"
 	"os"
 	"strconv"
 	"strings"
 )
 
-func register(origin string, message messageStruct, socket socketStruct) error {
+func register(origin string, message messageStruct) error {
 	path := fmt.Sprintf("./data/%s/%d.json", origin, message.senderID)
 	arg := strings.Split(message.messageContent, "-")
 	if len(arg) <= 2 {
-		_ = sendMessage(origin, "Invalid number of arguments", message.senderID, socket, nil)
+		_ = sendMessage(origin, "Invalid number of arguments", message.senderID, nil)
 		return nil
 	}
 
@@ -42,14 +41,14 @@ func register(origin string, message messageStruct, socket socketStruct) error {
 		return err
 	}
 	err = sendMessage(origin, fmt.Sprintf("You are now talking to %s on %s", arg[1], arg[2]),
-		message.senderID, socket, nil)
+		message.senderID, nil)
 	if err != nil {
 		return err
 	}
 	return nil
 }
 
-func sendMessage(platform, text string, dest int, socket socketStruct, attachments []string) error {
+func sendMessage(platform, text string, dest int, attachments []string) error {
 	attachmentsList := ""
 
 	if attachments != nil {
@@ -61,25 +60,14 @@ func sendMessage(platform, text string, dest int, socket socketStruct, attachmen
 
 	switch platform {
 	case "telegram":
-		msg := tgbotapi.NewMessage(int64(dest), text)
-		_, err := bot.Send(msg)
-		if err != nil {
-			return err
-		}
+		return telegramSendMessage(text, dest)
 	case "discord":
-		dmChan, err := socket.discordSession.UserChannelCreate(fmt.Sprintf("%d", dest))
-		if err != nil {
-			return err
-		}
-		_, err = socket.discordSession.ChannelMessageSend(dmChan.ID, text)
-		if err != nil {
-			return err
-		}
+		return discordSendMessage(text, dest)
 	}
 	return nil
 }
 
-func transmitMessage(origin string, message messageStruct, socket socketStruct) error {
+func transmitMessage(origin string, message messageStruct) error {
 	var path = fmt.Sprintf("./data/%s/%d.json", origin, message.senderID)
 
 	message.messageContent = fmt.Sprintf("FROM: %s (%d - %s)\n\t%s", message.senderName, message.senderID,
@@ -87,7 +75,7 @@ func transmitMessage(origin string, message messageStruct, socket socketStruct) 
 
 	_, err := os.Stat(path)
 	if os.IsNotExist(err) {
-		_ = sendMessage(origin, "You must register using /dest -ID -Platform", message.senderID, socket, nil)
+		_ = sendMessage(origin, "You must register using /dest -ID -Platform", message.senderID, nil)
 		return nil
 	}
 	fileData, err := ioutil.ReadFile(path)
@@ -102,7 +90,7 @@ func transmitMessage(origin string, message messageStruct, socket socketStruct) 
 	if fileDataJson.ToPlatform == "discord" {
 		message.messageContent = fmt.Sprintf("```%s```", message.messageContent)
 	}
-	err = sendMessage(fileDataJson.ToPlatform, message.messageContent, fileDataJson.ToID, socket, message.attachmentsLinks)
+	err = sendMessage(fileDataJson.ToPlatform, message.messageContent, fileDataJson.ToID, message.attachmentsLinks)
 	if err != nil {
 		return err
 	}
