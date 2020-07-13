@@ -23,4 +23,5 @@ type contact struct {
 	FromID     int    `json:"fromID"`
 	ToID       int    `json:"toID"`
 	ToPlatform string `json:"toPlatform"`
+	ToName     string `json:"toName"`
 }

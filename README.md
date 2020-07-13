@@ -11,7 +11,7 @@ Join [this discord server](https://discord.gg/dmMev8d) and open your Direct Mess
 Start a conversation with [this bot](https://t.me/millefeuilleTeleCordBot).
 
 ### Sending Messages
-Start a conversation with the command `/dest -ID -platform`
+Start a conversation with the command `/dest -ID -Platform -Nickname`
 #### From Discord
 To get your userID you need to have dev mode activated in Discord and then right click the desired profile, and select `Copy ID`
 #### From Telegram

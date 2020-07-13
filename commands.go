@@ -12,17 +12,20 @@ import (
 func register(origin string, message messageStruct) error {
 	path := fmt.Sprintf("./data/%s/%d.json", origin, message.senderID)
 	arg := strings.Split(message.messageContent, "-")
-	if len(arg) <= 2 {
+	if len(arg) <= 3 {
 		_ = sendMessage(origin, "Invalid number of arguments", message.senderID, nil)
 		return nil
 	}
 
 	arg[1] = strings.TrimSpace(arg[1])
+	arg[2] = strings.TrimSpace(arg[2])
+	arg[3] = strings.TrimSpace(arg[3])
 	dest, _ := strconv.Atoi(arg[1])
 	contact := contact{
 		FromID:     message.senderID,
 		ToID:       dest,
 		ToPlatform: arg[2],
+		ToName:     arg[3],
 	}
 	_, err := os.Stat(path)
 	if os.IsNotExist(err) {
@@ -40,7 +43,7 @@ func register(origin string, message messageStruct) error {
 	if err != nil {
 		return err
 	}
-	err = sendMessage(origin, fmt.Sprintf("You are now talking to %s on %s", arg[1], arg[2]),
+	err = sendMessage(origin, fmt.Sprintf("You are now talking to %s (%s) on %s", arg[1], arg[2], arg[3]),
 		message.senderID, nil)
 	if err != nil {
 		return err
@@ -75,7 +78,8 @@ func transmitMessage(origin string, message messageStruct) error {
 
 	_, err := os.Stat(path)
 	if os.IsNotExist(err) {
-		_ = sendMessage(origin, "You must register using /dest -ID -Platform", message.senderID, nil)
+		_ = sendMessage(origin, "You must register using /dest -ID -Platform -Nickname",
+			message.senderID, nil)
 		return nil
 	}
 	fileData, err := ioutil.ReadFile(path)
