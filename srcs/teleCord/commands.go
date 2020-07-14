@@ -12,7 +12,7 @@ import (
 )
 
 func Register(origin string, message definitions.MessageStruct) error {
-	path := fmt.Sprintf("./data/%s/%d.json", origin, message.SenderID)
+	path := fmt.Sprintf("../data/%s/%d.json", origin, message.SenderID)
 	arg := strings.Split(message.MessageContent, "-")
 	if len(arg) <= 3 {
 		_ = routers.SendingRouter(origin, "Invalid number of arguments", message.SenderID, nil)
@@ -83,7 +83,7 @@ func GetDest(origin string, message definitions.MessageStruct) error {
 }
 
 func TransmitMessage(origin string, message definitions.MessageStruct) error {
-	var path = fmt.Sprintf("./data/%s/%d.json", origin, message.SenderID)
+	var path = fmt.Sprintf("../data/%s/%d.json", origin, message.SenderID)
 
 	message.MessageContent = fmt.Sprintf("FROM: %s (%d - %s)\n\t%s", message.SenderName, message.SenderID,
 		origin, message.MessageContent)
