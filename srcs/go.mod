@@ -1,4 +1,4 @@
-module TeleCord
+module github.com/Millefeuille42/TeleCord
 
 go 1.14
 

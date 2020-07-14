@@ -1,8 +1,8 @@
 package routers
 
 import (
-	"TeleCord/definitions"
-	"TeleCord/perApp/messageParser"
+	"github.com/Millefeuille42/TeleCord/definitions"
+	"github.com/Millefeuille42/TeleCord/perApp/messageParser"
 )
 
 func ParsingRouter(origin string) (definitions.MessageStruct, error) {

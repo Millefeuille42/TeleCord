@@ -1,8 +1,8 @@
 package routers
 
 import (
-	"TeleCord/perApp/messageSender"
 	"fmt"
+	"github.com/Millefeuille42/TeleCord/perApp/messageSender"
 )
 
 func SendingRouter(platform, text string, dest int, attachments []string) error {

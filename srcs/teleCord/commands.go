@@ -1,10 +1,10 @@
 package teleCord
 
 import (
-	"TeleCord/definitions"
-	"TeleCord/teleCord/routers"
 	"encoding/json"
 	"fmt"
+	"github.com/Millefeuille42/TeleCord/definitions"
+	"github.com/Millefeuille42/TeleCord/teleCord/routers"
 	"io/ioutil"
 	"os"
 	"strconv"

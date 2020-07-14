@@ -1,9 +1,9 @@
 package messageHandler
 
 import (
-	"TeleCord/definitions"
-	"TeleCord/teleCord"
-	"TeleCord/utils"
+	"github.com/Millefeuille42/TeleCord/definitions"
+	"github.com/Millefeuille42/TeleCord/teleCord"
+	"github.com/Millefeuille42/TeleCord/utils"
 	"github.com/bwmarrin/discordgo"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 )

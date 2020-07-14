@@ -1,10 +1,10 @@
 package main
 
 import (
-	"TeleCord/definitions"
-	"TeleCord/perApp/appSetup"
-	"TeleCord/utils"
 	"fmt"
+	"github.com/Millefeuille42/TeleCord/definitions"
+	"github.com/Millefeuille42/TeleCord/perApp/appSetup"
+	"github.com/Millefeuille42/TeleCord/utils"
 	"github.com/bwmarrin/discordgo"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 	"os"
