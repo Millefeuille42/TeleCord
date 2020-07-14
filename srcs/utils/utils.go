@@ -1,4 +1,4 @@
-package main
+package utils
 
 import (
 	"log"
@@ -6,13 +6,13 @@ import (
 	"time"
 )
 
-func checkError(err error) {
+func CheckError(err error) {
 	if err != nil {
 		panic(err)
 	}
 }
 
-func hang() {
+func Hang() {
 	for {
 		time.Sleep(1 * time.Second)
 	}

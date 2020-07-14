@@ -1,6 +1,9 @@
 package main
 
 import (
+	"TeleCord/definitions"
+	"TeleCord/perApp/appSetup"
+	"TeleCord/utils"
 	"fmt"
 	"github.com/bwmarrin/discordgo"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
@@ -10,8 +13,6 @@ import (
 	"time"
 )
 
-var socket socketStruct
-
 func main() {
 	args := os.Args
 
@@ -20,15 +21,15 @@ func main() {
 		return
 	}
 
-	socket = socketStruct{
-		telegramSession: telegramSetup(args),
-		discordSession:  discordSetup(args),
-		discordMessage:  nil,
-		telegramMessage: tgbotapi.Update{},
+	definitions.Socket = definitions.SocketStruct{
+		TelegramSession: appSetup.TelegramSetup(args),
+		DiscordSession:  appSetup.DiscordSetup(args),
+		DiscordMessage:  nil,
+		TelegramMessage: tgbotapi.Update{},
 	}
 
-	setupCloseHandler(socket.discordSession)
-	hang()
+	setupCloseHandler(definitions.Socket.DiscordSession)
+	utils.Hang()
 }
 
 func setupCloseHandler(session *discordgo.Session) {
