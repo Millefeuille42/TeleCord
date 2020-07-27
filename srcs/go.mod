@@ -1,4 +1,4 @@
-module github.com/Millefeuille42/TeleCord
+module github.com/Millefeuille42/TeleCord/srcs
 
 go 1.14
 

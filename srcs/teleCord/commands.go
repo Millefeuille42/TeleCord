@@ -3,8 +3,8 @@ package teleCord
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/Millefeuille42/TeleCord/definitions"
-	"github.com/Millefeuille42/TeleCord/teleCord/routers"
+	"github.com/Millefeuille42/TeleCord/srcs/definitions"
+	"github.com/Millefeuille42/TeleCord/srcs/teleCord/routers"
 	"io/ioutil"
 	"os"
 	"strconv"
@@ -55,7 +55,7 @@ func Register(origin string, message definitions.MessageStruct) error {
 }
 
 func GetDest(origin string, message definitions.MessageStruct) error {
-	var path = fmt.Sprintf("./data/%s/%d.json", origin, message.SenderID)
+	var path = fmt.Sprintf("../data/%s/%d.json", origin, message.SenderID)
 
 	_, err := os.Stat(path)
 	if os.IsNotExist(err) {
@@ -114,12 +114,13 @@ func TransmitMessage(origin string, message definitions.MessageStruct) error {
 }
 
 func HandleMessage(origin string) {
+	message := definitions.MessageStruct{}
+
 	message, err := routers.ParsingRouter(origin)
 	if err != nil {
 		_ = routers.SendingRouter(origin, err.Error(), message.SenderID, nil)
 		return
 	}
-
 	if strings.HasPrefix(message.MessageContent, "/") {
 		var err error = nil
 

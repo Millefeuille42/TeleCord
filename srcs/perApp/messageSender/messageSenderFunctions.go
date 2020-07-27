@@ -2,7 +2,7 @@ package messageSender
 
 import (
 	"fmt"
-	"github.com/Millefeuille42/TeleCord/definitions"
+	"github.com/Millefeuille42/TeleCord/srcs/definitions"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 )
 

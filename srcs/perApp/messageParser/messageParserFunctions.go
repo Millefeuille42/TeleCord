@@ -1,7 +1,7 @@
 package messageParser
 
 import (
-	"github.com/Millefeuille42/TeleCord/definitions"
+	"github.com/Millefeuille42/TeleCord/srcs/definitions"
 	"strconv"
 )
 
