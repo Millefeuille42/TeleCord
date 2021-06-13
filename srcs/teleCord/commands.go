@@ -23,7 +23,7 @@ func Register(origin string, message definitions.MessageStruct) error {
 	arg[2] = strings.TrimSpace(arg[2])
 	arg[2] = strings.ToLower(arg[2])
 	arg[3] = strings.TrimSpace(arg[3])
-	dest, _ := strconv.Atoi(arg[1])
+	dest, _ := strconv.ParseInt(arg[1], 10, 64)
 	contact := definitions.Contact{
 		FromID:     message.SenderID,
 		ToID:       uint64(dest),

@@ -31,7 +31,7 @@ func DiscordParseMessage() (definitions.MessageStruct, error) {
 	var attachments []string = nil
 	var message definitions.MessageStruct
 
-	authorID, _ := strconv.Atoi(definitions.Socket.DiscordMessage.Author.ID)
+	authorID, _ := strconv.ParseInt(definitions.Socket.DiscordMessage.Author.ID, 10, 64)
 	if len(definitions.Socket.DiscordMessage.Attachments) > 0 {
 		attachments = make([]string, 0)
 		for _, att := range definitions.Socket.DiscordMessage.Attachments {
