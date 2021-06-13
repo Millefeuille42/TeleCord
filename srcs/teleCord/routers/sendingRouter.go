@@ -5,7 +5,7 @@ import (
 	"github.com/Millefeuille42/TeleCord/srcs/perApp/messageSender"
 )
 
-func SendingRouter(platform, text string, dest int, attachments []string) error {
+func SendingRouter(platform, text string, dest uint64, attachments []string) error {
 	attachmentsList := ""
 
 	if attachments != nil {

@@ -14,12 +14,12 @@ func TelegramParseMessage() (definitions.MessageStruct, error) {
 		attachment, err := definitions.Socket.TelegramSession.GetFileDirectURL(definitions.Socket.TelegramMessage.
 			Message.Document.FileID)
 		if err != nil {
-			return definitions.MessageStruct{SenderID: definitions.Socket.TelegramMessage.Message.From.ID}, err
+			return definitions.MessageStruct{SenderID: uint64(definitions.Socket.TelegramMessage.Message.From.ID)}, err
 		}
 		attachments = append(attachments, attachment)
 	}
 	message = definitions.MessageStruct{
-		SenderID:         definitions.Socket.TelegramMessage.Message.From.ID,
+		SenderID:         uint64(definitions.Socket.TelegramMessage.Message.From.ID),
 		SenderName:       definitions.Socket.TelegramMessage.Message.From.UserName,
 		MessageContent:   definitions.Socket.TelegramMessage.Message.Text,
 		AttachmentsLinks: attachments,
@@ -39,7 +39,7 @@ func DiscordParseMessage() (definitions.MessageStruct, error) {
 		}
 	}
 	message = definitions.MessageStruct{
-		SenderID:         authorID,
+		SenderID:         uint64(authorID),
 		SenderName:       definitions.Socket.DiscordMessage.Author.Username,
 		MessageContent:   definitions.Socket.DiscordMessage.Content,
 		AttachmentsLinks: attachments,

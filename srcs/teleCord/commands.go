@@ -26,7 +26,7 @@ func Register(origin string, message definitions.MessageStruct) error {
 	dest, _ := strconv.Atoi(arg[1])
 	contact := definitions.Contact{
 		FromID:     message.SenderID,
-		ToID:       dest,
+		ToID:       uint64(dest),
 		ToPlatform: arg[2],
 		ToName:     arg[3],
 	}

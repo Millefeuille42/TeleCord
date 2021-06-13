@@ -13,15 +13,15 @@ type SocketStruct struct {
 }
 
 type MessageStruct struct {
-	SenderID         int
+	SenderID         uint64
 	SenderName       string
 	MessageContent   string
 	AttachmentsLinks []string
 }
 
 type Contact struct {
-	FromID     int    `json:"fromID"`
-	ToID       int    `json:"toID"`
+	FromID     uint64 `json:"fromID"`
+	ToID       uint64 `json:"toID"`
 	ToPlatform string `json:"toPlatform"`
 	ToName     string `json:"toName"`
 }
